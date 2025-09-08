@@ -1,0 +1,18 @@
+{% block center %}
+    <h2>Usando formulários</h2>
+    <form method="post">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <label for="nome" class="form-label">Nome da cidade</label>
+            {{ form.nome }}
+        </div>
+
+        <div class="mb-3">
+            <label for="sigla_estado" class="form-label">Sigla do Estado</label>
+            {{ form.sigla_estado }}
+        </div>
+
+        <button type="submit" class="btn btn-primary">Enviar</button>
+    </form>
+{% endblock %}
