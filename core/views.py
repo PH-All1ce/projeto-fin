@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404,redirect
 from .models import *
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -33,3 +33,12 @@ def painel_vendedor(request):
     if request.session.get("tipo") == "vendedor":
         return render(request, "painel.html")
     return redirect("listar")
+
+def veiculos_listar_remover(request):
+    veiculos = Veiculo.objects.all()
+    return render(request, 'removeveiculo.html', {'veiculos': veiculos})
+
+def veiculo_remover(request, id):
+    veiculo = get_object_or_404(Veiculo, id=id)
+    veiculo.delete()
+    return redirect('home')
