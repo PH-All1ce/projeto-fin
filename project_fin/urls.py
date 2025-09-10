@@ -26,4 +26,6 @@ urlpatterns = [
     path('painel/', painel_vendedor, name='painel'),
     path('painel/veiculo_remover/<int:id>/', veiculo_remover, name='vei-rm'),
     path('painel/veiculo_remover/', veiculos_listar_remover, name='vei-list-rm'),
+    path('painel/veiculo_criar/', veiculo_criar, name='veiculo_criar'),
+    path('painel/veiculo_editar/<int:id>/', veiculo_editar, name='veiculo_editar')
 ]

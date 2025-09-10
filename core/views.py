@@ -3,6 +3,7 @@ from .models import *
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from .forms import *
 
 # Create your views here.
 
@@ -42,3 +43,29 @@ def veiculo_remover(request, id):
     veiculo = get_object_or_404(Veiculo, id=id)
     veiculo.delete()
     return redirect('home')
+
+def veiculo_editar(request,id):
+    veiculo = get_object_or_404(Veiculo,id=id)
+   
+    if request.method == 'POST':
+        form = VeiculoForm(request.POST,request.FILES,instance=veiculo)
+
+        if form.is_valid():
+            form.save()
+            return redirect('listar')
+    else:
+        form = VeiculoForm(instance=veiculo)
+
+    return render(request,'formveiculo.html',{'form':form})
+
+def veiculo_criar(request):
+    if request.method == 'POST':
+        form = VeiculoForm(request.POST,request.FILES)
+        if form.is_valid():
+            form.save()
+            form = VeiculoForm()
+            return redirect('home')
+    else:
+        form = VeiculoForm()
+
+    return render(request, "formveiculo.html", {'form': form})

@@ -1,16 +1,53 @@
-{% block center %}
+{% extends 'base.html' %}
+
+{% block content %}
     <h2>Usando formulários</h2>
     <form method="post">
         {% csrf_token %}
 
         <div class="mb-3">
-            <label for="nome" class="form-label">Nome da cidade</label>
+            <label for="nome" class="form-label">Nome do carro</label>
             {{ form.nome }}
         </div>
 
         <div class="mb-3">
-            <label for="sigla_estado" class="form-label">Sigla do Estado</label>
-            {{ form.sigla_estado }}
+            <label for="preco" class="form-label">Preço</label>
+            {{ form.preco }}
+        </div>
+
+        <div class="mb-3">
+            <label for="modelo" class="form-label">Ano do modelo</label>
+            {{ form.ano_modelo }}
+        </div>
+
+        <div class="mb-3">
+            <label for="quilometragem" class="form-label">Quilometragem</label>
+            {{ form.quilometragem }}
+        </div>
+
+        <div class="mb-3">
+            <label for="potencia" class="form-label">Potência</label>
+            {{ form.potencia }}
+        </div>
+
+        <div class="mb-3">
+            <label for="consumo" class="form-label">Consumo</label>
+            {{ form.consumo }}
+        </div>
+
+        <div class="mb-3">
+            <label for="historico_dono" class="form-label">Histórico do dono</label>
+            {{ form.historico_dono }}
+        </div>
+
+        <div class="mb-3">
+            <label for="marca" class="form-label">Marca</label>
+            {{ form.marca }}
+        </div>
+
+        <div class="mb-3">
+            <label for="foto_url" class="form-label">Foto do carro</label>
+            {{ form.foto_url }}
         </div>
 
         <button type="submit" class="btn btn-primary">Enviar</button>

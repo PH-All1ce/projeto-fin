@@ -6,8 +6,8 @@
 <h1>Painel do Vendedor</h1>
 <h2>Gerenciar Veículos</h2>
 <ul>
-  <li><a href="#">Adicionar veículo</a></li>
-  <li><a href="#">Editar veículo</a></li>
+  <li><a href="{% url 'veiculo_criar' %}">Adicionar veículo</a></li>
+  <li><a href="{% url 'veiculo_editar' %}">Editar veículo</a></li>
   <li><a href="{% url 'vei-list-rm' %}">Remover veículo</a></li>
 </ul>
 {% endblock %}
