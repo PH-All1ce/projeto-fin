@@ -5,9 +5,95 @@
 {% block content %}
 <h1>Painel do Vendedor</h1>
 <h2>Gerenciar Veículos</h2>
+
 <ul>
   <li><a href="{% url 'veiculo_criar' %}">Adicionar veículo</a></li>
-  <li><a href="{% url 'veiculo_editar' %}">Editar veículo</a></li>
   <li><a href="{% url 'vei-list-rm' %}">Remover veículo</a></li>
 </ul>
+
+<h2>Seus Veículos</h2>
+<div class="car-grid">
+  {% for veiculo in veiculos %}
+    <div class="car-card">
+      {% if veiculo.foto %}
+        <img src="{{ veiculo.foto.url }}" alt="{{ veiculo.nome }}">
+      {% else %}
+        <img src="https://via.placeholder.com/300x180?text=Sem+Foto" alt="Sem foto">
+      {% endif %}
+      <div class="info">
+        <h3>{{ veiculo.nome }}</h3>
+        <div class="year-price">
+          <span>Ano: {{ veiculo.ano }}</span>
+          <span class="price">R$ {{ veiculo.preco }}</span>
+        </div>
+        <a href="{% url 'veiculo_editar' veiculo.id %}" class="btn-details">Editar</a>
+      </div>
+    </div>
+  {% empty %}
+    <p>Nenhum veículo cadastrado.</p>
+  {% endfor %}
+</div>
+
+<style>
+  .car-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+  }
+
+  .car-card {
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+    transition: transform 0.3s;
+  }
+
+  .car-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .car-card img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+  }
+
+  .car-card .info {
+    padding: 12px;
+  }
+
+  .car-card h3 {
+    font-size: 1rem;
+    margin-bottom: 6px;
+  }
+
+  .car-card .year-price {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    margin-bottom: 10px;
+  }
+
+  .car-card .price {
+    color: #28a745;
+    font-weight: bold;
+  }
+
+  .btn-details {
+    display: block;
+    text-align: center;
+    background: #007bff;
+    color: #fff;
+    padding: 8px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.85rem;
+  }
+
+  .btn-details:hover {
+    background: #0056b3;
+  }
+</style>
 {% endblock %}

@@ -15,7 +15,7 @@ def carros_listar(request):
 def login_fake(request):
     if request.method == "POST":
         email = request.POST.get("email")
-        senha = request.POST.get("senha")  # só pra simular, não valida
+        senha = request.POST.get("senha")
 
         if email == "vendedor@teste.com":
             request.session["tipo"] = "vendedor"
@@ -27,12 +27,13 @@ def login_fake(request):
     return render(request, "login.html")
 
 def logout_fake(request):
-    request.session.flush()  # limpa a sessão
+    request.session.flush()
     return redirect("home")
 
 def painel_vendedor(request):
     if request.session.get("tipo") == "vendedor":
-        return render(request, "painel.html")
+        veiculos = Veiculo.objects.all()
+        return render(request, "painel.html", {"veiculos": veiculos})
     return redirect("listar")
 
 def veiculos_listar_remover(request):
@@ -43,6 +44,10 @@ def veiculo_remover(request, id):
     veiculo = get_object_or_404(Veiculo, id=id)
     veiculo.delete()
     return redirect('home')
+
+def veiculos_infos(request, id):
+    veiculo = get_object_or_404(Veiculo, id=id)
+    return render(request, 'infos.html', {'veiculo': veiculo})
 
 def veiculo_editar(request,id):
     veiculo = get_object_or_404(Veiculo,id=id)
