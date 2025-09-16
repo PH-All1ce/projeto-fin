@@ -46,7 +46,7 @@ def veiculo_remover(request, id):
     return redirect('home')
 
 def veiculos_infos(request, id):
-    veiculo = get_object_or_404(Veiculo, id=id)
+    veiculo = Veiculo.objects.get(id=id)
     return render(request, 'infos.html', {'veiculo': veiculo})
 
 def veiculo_editar(request,id):
